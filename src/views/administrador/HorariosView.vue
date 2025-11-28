@@ -270,7 +270,7 @@ const horariosGruposData = ref([]);
 const HOST = window.location.hostname;
 
 // --- URLs de las APIs ---
-const PYTHON_API = `http://${HOST}:8000`;
+const PYTHON_API = `https://algoritmo-production.up.railway.app`;
 const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
 
 

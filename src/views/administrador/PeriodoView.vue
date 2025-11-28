@@ -138,8 +138,6 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname
-
 const API_PERIODOS = `https://backend-production-04cf.up.railway.app/periodos`
 
 
