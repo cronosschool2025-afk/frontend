@@ -58,7 +58,7 @@
         <template v-if="!isLoading && !error && horarioPublicado && horarioData">
           
           <div class="horarios-cards-wrapper">
-            <div class="horario-card horario-publicado">
+            <div class="horario-card horario-publicado" id="horario-card-alumno">
               
               <!-- HEADER DE LA TARJETA -->
               <div class="horario-header">
@@ -79,9 +79,9 @@
                 <div class="horario-actions">
                   <button 
                     @click="generarPDFIndividual" 
-                    class="btn-danger btn-accion"
-                  >
-                  PDF
+                    class="btn-danger btn-accion btn-pdf-action"
+                    id="btn-pdf-alumno"
+                  >PDF
                   </button>
                 </div>
               </div>
@@ -165,11 +165,10 @@ const isLoading = ref(false);
 const error = ref(null);
 const horarioData = ref(null);
 const horarioPublicado = ref(false);
-const grupoAlumno = ref(null); // ID del grupo del alumno
+const grupoAlumno = ref(null);
 
-// --- URLs de las APIs ---
+// --- URLs DE LAS APIs ---
 const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
-
 
 // --- FUNCIÓN PARA OBTENER EL ID DEL ALUMNO DESDE EL LOCAL STORAGE ---
 const obtenerIdAlumnoDesdeLocalStorage = () => {
@@ -189,12 +188,10 @@ const obtenerIdAlumnoDesdeLocalStorage = () => {
 // --- FUNCIÓN PARA OBTENER EL GRUPO DEL ALUMNO ---
 const obtenerGrupoAlumno = async () => {
   try {
-    // Obtener el ID del alumno desde localStorage (id_rol)
     const idAlumno = obtenerIdAlumnoDesdeLocalStorage();
     
     console.log('ID del alumno (id_rol):', idAlumno);
     
-    // Obtener información del estudiante desde el endpoint
     const response = await fetch(`${NESTJS_API}/estudiantes/${idAlumno}`);
     
     if (!response.ok) {
@@ -204,7 +201,6 @@ const obtenerGrupoAlumno = async () => {
     const estudiante = await response.json();
     console.log('Datos del estudiante:', estudiante);
     
-    // Verificar que el estudiante tenga un grupo asignado
     if (!estudiante.id_grupo) {
       throw new Error('El estudiante no tiene un grupo asignado');
     }
@@ -225,7 +221,6 @@ const cargarHorario = async () => {
   horarioPublicado.value = false;
   
   try {
-    // Primero obtener el grupo del alumno
     const idGrupo = await obtenerGrupoAlumno();
     
     if (!idGrupo) {
@@ -235,7 +230,6 @@ const cargarHorario = async () => {
     
     console.log('Cargando horario del grupo:', idGrupo);
     
-    // Obtener todos los horarios formateados
     const response = await fetch(`${NESTJS_API}/horario-profesor-asignatura/grupos/formateados`);
     
     if (!response.ok) {
@@ -245,7 +239,6 @@ const cargarHorario = async () => {
     const todosLosHorarios = await response.json();
     console.log('Horarios obtenidos:', todosLosHorarios);
     
-    // Buscar el horario del grupo específico del alumno
     const horarioGrupo = todosLosHorarios.find(h => h.id === idGrupo);
     
     if (!horarioGrupo) {
@@ -253,14 +246,12 @@ const cargarHorario = async () => {
       return;
     }
     
-    // Verificar si está publicado
     if (!horarioGrupo.publicado) {
       horarioPublicado.value = false;
       horarioData.value = null;
       return;
     }
     
-    // Horario encontrado y publicado
     horarioData.value = horarioGrupo;
     horarioPublicado.value = true;
     
@@ -334,42 +325,101 @@ const formatTimeRange = (startHour) => {
   return `${startHour} - ${eh}:${em}`;
 };
 
-// --- GENERAR PDF ---
+// --- GENERAR PDF MEJORADO ---
 const generarPDFIndividual = async () => {
-  const el = document.querySelector('.horario-card');
+  const el = document.getElementById('horario-card-alumno');
   if (!el) return;
   
-  // Ocultar el botón temporalmente
-  const btn = el.querySelector('.btn-danger');
-  if (btn) btn.style.display = 'none';
+  // Guardar el contenedor de acciones
+  const actionsContainer = el.querySelector('.horario-actions');
+  const originalDisplay = actionsContainer ? actionsContainer.style.display : '';
+  const originalVisibility = actionsContainer ? actionsContainer.style.visibility : '';
   
-  const canvas = await html2canvas(el, { scale: 2 });
-  
-  // Mostrar el botón nuevamente
-  if (btn) btn.style.display = 'block';
-  
-  const pdf = new jsPDF('l', 'mm', 'a4');
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  const margin = 8;
-  
-  const w = pageWidth - (margin * 2);
-  const h = (canvas.height * w) / canvas.width;
-  
-  let finalW = w;
-  let finalH = h;
-  
-  if (h > pageHeight - (margin * 2)) {
-    finalH = pageHeight - (margin * 2);
-    finalW = (canvas.width * finalH) / canvas.height;
+  // Ocultar completamente el contenedor de acciones
+  if (actionsContainer) {
+    actionsContainer.style.display = 'none';
+    actionsContainer.style.visibility = 'hidden';
   }
   
-  const x = (pageWidth - finalW) / 2;
-  const y = (pageHeight - finalH) / 2;
-  
-  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, finalW, finalH);
-  
-  const nombreLimpio = horarioData.value.nombre.replace(/\s/g, '_').replace(/[^\w]/g, '');
-  pdf.save(`Mi_Horario_${nombreLimpio}_${periodoCuatrimestral.value}.pdf`);
+  try {
+    // Esperar un momento para que el DOM se actualice
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Captura con mayor calidad y tamaño específico
+    const canvas = await html2canvas(el, { 
+      scale: 3,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff',
+      windowWidth: 1400,
+      windowHeight: el.scrollHeight
+    });
+    
+    const pdf = new jsPDF('l', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+    
+    // Calcular dimensiones manteniendo proporción
+    const availableWidth = pageWidth - (margin * 2);
+    const availableHeight = pageHeight - (margin * 2);
+    
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const imgRatio = imgWidth / imgHeight;
+    const pageRatio = availableWidth / availableHeight;
+    
+    let finalW, finalH;
+    
+    if (imgRatio > pageRatio) {
+      finalW = availableWidth;
+      finalH = availableWidth / imgRatio;
+    } else {
+      finalH = availableHeight;
+      finalW = availableHeight * imgRatio;
+    }
+    
+    // Centrar en la página
+    const x = (pageWidth - finalW) / 2;
+    const y = (pageHeight - finalH) / 2;
+    
+    pdf.addImage(canvas.toDataURL('image/png', 1.0), 'PNG', x, y, finalW, finalH);
+    
+    const nombreLimpio = horarioData.value.nombre.replace(/\s/g, '_').replace(/[^\w]/g, '');
+    pdf.save(`Mi_Horario_${nombreLimpio}_${periodoCuatrimestral.value}.pdf`);
+    
+  } finally {
+    // Restaurar el contenedor de acciones
+    if (actionsContainer) {
+      actionsContainer.style.display = originalDisplay;
+      actionsContainer.style.visibility = originalVisibility;
+    }
+  }
 };
 </script>
+
+<style scoped>
+.horario-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.horario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: auto;
+  position: relative;
+}
+
+.horario-info {
+  flex: 1;
+}
+
+.btn-pdf-action {
+  white-space: nowrap;
+  min-width: fit-content;
+}
+</style>

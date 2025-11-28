@@ -61,10 +61,9 @@
               <div class="horario-actions">
                 <button 
                   @click="generarPDFIndividual(horarioProfesor.id, horarioProfesor.nombre)" 
-                  class="btn-danger btn-accion"
+                  class="btn-danger btn-accion btn-pdf-action"
                   :id="`btn-pdf-${horarioProfesor.id}`"
-                >
-                  Descargar PDF
+                >PDF
                 </button>
               </div>
             </div>
@@ -152,10 +151,8 @@ const isLoading = ref(false);
 const error = ref(null);
 const horarioProfesor = ref(null);
 
-// --- URL de la API ---
-const HOST = window.location.hostname;
+// --- URL DE LA API ---
 const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
-
 
 // --- FUNCIÓN PARA OBTENER EL ID DEL PROFESOR DESDE EL LOCAL STORAGE ---
 const obtenerIdProfesorDesdeLocalStorage = () => {
@@ -179,7 +176,6 @@ const getCeldaStyle = (item, dia, hora) => {
   const clase = item.data[dia]?.[hora];
   if (!clase) return {};
   
-  // Para vista de profesores: color principal = grupo
   if (Array.isArray(clase) && clase.length > 0) {
     const primeraClase = clase[0];
     const colorGrupo = primeraClase.colorGrupo || '#88B7F3';
@@ -212,7 +208,6 @@ const getTextColor = (bgColor) => {
 const getLeyendaIndividual = (item) => {
   const itemsMap = new Map();
   
-  // Recopilar grupos únicos de este profesor
   Object.values(item.data).forEach(dia => {
     Object.values(dia).forEach(clases => {
       if (Array.isArray(clases)) {
@@ -237,7 +232,6 @@ const cargarHorario = async () => {
   error.value = null;
   
   try {
-    // Obtener el ID del profesor desde localStorage
     idProfesorActual.value = obtenerIdProfesorDesdeLocalStorage();
     
     console.log('ID del profesor (id_rol):', idProfesorActual.value);
@@ -258,7 +252,6 @@ const cargarHorario = async () => {
     const data = await response.json();
     console.log('Horario cargado:', data);
     
-    // Transformar datos para que coincidan con el formato esperado
     if (data) {
       horarioProfesor.value = {
         id: data.id,
@@ -266,16 +259,13 @@ const cargarHorario = async () => {
         data: {}
       };
 
-      // Inicializar días
       dias.value.forEach(dia => {
         horarioProfesor.value.data[dia] = {};
       });
 
-      // Convertir el formato de datos
       Object.keys(data.data).forEach(dia => {
         Object.keys(data.data[dia]).forEach(hora => {
           const clase = data.data[dia][hora];
-          // Asegurarse de que sea un array
           horarioProfesor.value.data[dia][hora] = Array.isArray(clase) ? clase : [clase];
         });
       });
@@ -302,39 +292,102 @@ const formatTimeRange = (startHour) => {
   return `${startHour} - ${eh}:${em}`;
 };
 
+// --- GENERAR PDF MEJORADO ---
 const generarPDFIndividual = async (id, nombre) => {
   const el = document.getElementById(`horario-card-${id}`);
   if (!el) return;
   
-  const btn = document.getElementById(`btn-pdf-${id}`);
-  if (btn) btn.style.display = 'none';
+  // Guardar el contenedor de acciones
+  const actionsContainer = el.querySelector('.horario-actions');
+  const originalDisplay = actionsContainer ? actionsContainer.style.display : '';
+  const originalVisibility = actionsContainer ? actionsContainer.style.visibility : '';
   
-  const canvas = await html2canvas(el, { scale: 2 });
-  
-  if (btn) btn.style.display = 'block';
-  
-  const pdf = new jsPDF('l', 'mm', 'a4');
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  const margin = 8;
-  
-  const w = pageWidth - (margin * 2);
-  const h = (canvas.height * w) / canvas.width;
-  
-  let finalW = w;
-  let finalH = h;
-  
-  if (h > pageHeight - (margin * 2)) {
-    finalH = pageHeight - (margin * 2);
-    finalW = (canvas.width * finalH) / canvas.height;
+  // Ocultar completamente el contenedor de acciones
+  if (actionsContainer) {
+    actionsContainer.style.display = 'none';
+    actionsContainer.style.visibility = 'hidden';
   }
   
-  const x = (pageWidth - finalW) / 2;
-  const y = (pageHeight - finalH) / 2;
-  
-  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', x, y, finalW, finalH);
-  
-  const nombreLimpio = nombre.replace(/\s/g, '_').replace(/[^\w]/g, '');
-  pdf.save(`Mi_Horario_${nombreLimpio}_${periodoCuatrimestral.value}.pdf`);
+  try {
+    // Esperar un momento para que el DOM se actualice
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Captura con mayor calidad y tamaño específico
+    const canvas = await html2canvas(el, { 
+      scale: 3,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff',
+      windowWidth: 1400,
+      windowHeight: el.scrollHeight
+    });
+    
+    const pdf = new jsPDF('l', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+    
+    // Calcular dimensiones manteniendo proporción
+    const availableWidth = pageWidth - (margin * 2);
+    const availableHeight = pageHeight - (margin * 2);
+    
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const imgRatio = imgWidth / imgHeight;
+    const pageRatio = availableWidth / availableHeight;
+    
+    let finalW, finalH;
+    
+    if (imgRatio > pageRatio) {
+      finalW = availableWidth;
+      finalH = availableWidth / imgRatio;
+    } else {
+      finalH = availableHeight;
+      finalW = availableHeight * imgRatio;
+    }
+    
+    // Centrar en la página
+    const x = (pageWidth - finalW) / 2;
+    const y = (pageHeight - finalH) / 2;
+    
+    pdf.addImage(canvas.toDataURL('image/png', 1.0), 'PNG', x, y, finalW, finalH);
+    
+    const nombreLimpio = nombre.replace(/\s/g, '_').replace(/[^\w]/g, '');
+    pdf.save(`Mi_Horario_${nombreLimpio}_${periodoCuatrimestral.value}.pdf`);
+    
+  } finally {
+    // Restaurar el contenedor de acciones
+    if (actionsContainer) {
+      actionsContainer.style.display = originalDisplay;
+      actionsContainer.style.visibility = originalVisibility;
+    }
+  }
 };
 </script>
+
+<style scoped>
+/* Asegurar que el contenedor de acciones no afecte el layout cuando está oculto */
+.horario-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.horario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: auto;
+  position: relative;
+}
+
+.horario-info {
+  flex: 1;
+}
+
+.btn-pdf-action {
+  white-space: nowrap;
+  min-width: fit-content;
+}
+</style>
