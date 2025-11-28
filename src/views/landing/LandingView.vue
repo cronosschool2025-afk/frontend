@@ -163,7 +163,7 @@
 
         <div class="footer-bottom">
           <p class="footer-text">
-            © 2024 Cronos - Sistema de Gestión de Horarios UTEQ
+            © 2024 Cronos - Sistema de Gestión de Horarios
           </p>
           <p class="footer-text-small">
             Optimizando la educación, un horario a la vez
