@@ -1085,8 +1085,9 @@ button:disabled, .btn-primary:disabled {
   color: #213547;
   margin: 8px 0;
 }
-.horario-actions{
-  height: 200px;
+.btn-publicar-individual {
+  min-width: 120px !important;
+  white-space: nowrap !important;
 }
 .tutor-info,
 .division-info {
