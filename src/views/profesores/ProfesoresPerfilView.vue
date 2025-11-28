@@ -56,11 +56,6 @@
               {{ datos.usuario.apellido_materno || '' }}
             </span>
           </div>
-          <div class="info-row">
-            <span class="info-label">Rol:</span>
-            <span class="info-value">{{ datos.usuario.rol || 'N/A' }}</span>
-          </div>
-          
           <!-- Datos del profesor (solo si existen) -->
           <template v-if="datos.extra">
             <div class="info-row">

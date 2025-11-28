@@ -53,10 +53,6 @@
             <span class="info-label">Nombre:</span>
             <span class="info-value">{{ datos.usuario.nombre }} {{ datos.usuario.apellido_paterno }} {{ datos.usuario.apellido_materno }}</span>
           </div>
-          <div class="info-row">
-            <span class="info-label">Rol:</span>
-            <span class="info-value">{{ datos.usuario.rol }}</span>
-          </div>
         </div>
         <div class="btn-group">
           <button @click="editarPerfil" class="btn-primary">Editar Perfil</button>
