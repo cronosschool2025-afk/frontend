@@ -22,6 +22,7 @@
       </div>
 
       <div class="dashboard-grid">
+        <!-- SECCIÓN: Gestión de Personas -->
         <router-link to="./alumnos" class="card card-1">
           <h2 class="card-title">Alumnos</h2>
           <p class="card-description">Gestión de estudiantes</p>
@@ -34,57 +35,62 @@
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./periodo" class="card card-3">
-          <h2 class="card-title">Periodos</h2>
-          <p class="card-description">Ciclos escolares</p>
-          <div class="card-arrow">→</div>
-        </router-link>
-
-        <router-link to="./turno" class="card card-4">
-          <h2 class="card-title">Turnos</h2>
-          <p class="card-description">Horarios generales</p>
-          <div class="card-arrow">→</div>
-        </router-link>
-
-        <router-link to="./materias" class="card card-5">
+        <!-- SECCIÓN: Configuración Académica -->
+        <router-link to="./materias" class="card card-3">
           <h2 class="card-title">Materias</h2>
           <p class="card-description">Asignaturas</p>
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./divisiones" class="card card-6">
+        <router-link to="./divisiones" class="card card-4">
           <h2 class="card-title">Divisiones</h2>
           <p class="card-description">Organización académica</p>
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./edificios" class="card card-7">
-          <h2 class="card-title">Edificios</h2>
-          <p class="card-description">Infraestructura</p>
-          <div class="card-arrow">→</div>
-        </router-link>
-
-        <router-link to="./grupos" class="card card-8">
+        <router-link to="./grupos" class="card card-5">
           <h2 class="card-title">Grupos</h2>
           <p class="card-description">Clases y secciones</p>
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./aulas" class="card card-9">
+        <!-- SECCIÓN: Infraestructura -->
+        <router-link to="./edificios" class="card card-6">
+          <h2 class="card-title">Edificios</h2>
+          <p class="card-description">Infraestructura</p>
+          <div class="card-arrow">→</div>
+        </router-link>
+
+        <router-link to="./aulas" class="card card-7">
           <h2 class="card-title">Aulas</h2>
           <p class="card-description">Salones disponibles</p>
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./horarios" class="card card-10">
-          <h2 class="card-title">Horarios</h2>
-          <p class="card-description">Programación de clases</p>
+        <!-- SECCIÓN: Configuración Temporal -->
+        <router-link to="./periodo" class="card card-8">
+          <h2 class="card-title">Periodos</h2>
+          <p class="card-description">Ciclos escolares</p>
           <div class="card-arrow">→</div>
         </router-link>
 
-        <router-link to="./profesoresasignaturas" class="card card-11">
-          <h2 class="card-title">Asignacion de profesores</h2>
-          <p class="card-description">Asignacion de grupos y asignaturas a profesores</p>
+        <router-link to="./turno" class="card card-9">
+          <h2 class="card-title">Turnos</h2>
+          <p class="card-description">Horarios generales</p>
+          <div class="card-arrow">→</div>
+        </router-link>
+
+        <!-- SECCIÓN: Asignaciones -->
+        <router-link to="./profesoresasignaturas" class="card card-10">
+          <h2 class="card-title">Asignación de Profesores</h2>
+          <p class="card-description">Grupos y asignaturas a profesores</p>
+          <div class="card-arrow">→</div>
+        </router-link>
+
+        <!-- SECCIÓN: Horarios (AL FINAL) -->
+        <router-link to="./horarios" class="card card-11">
+          <h2 class="card-title">Horarios</h2>
+          <p class="card-description">Programación de clases</p>
           <div class="card-arrow">→</div>
         </router-link>
       </div>
