@@ -26,7 +26,7 @@
         <input 
           v-model="correo_electronico" 
           type="email" 
-          placeholder="Correo electrónico" 
+          placeholder="Correo electrónico (Correo institucional)" 
           @input="detectarRol"
           required 
         />

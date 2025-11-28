@@ -39,8 +39,8 @@
               :disabled="!horariosGenerados || isLoading"
               class="btn-success"
             >
-              <span v-if="todosPublicados">Despublicar Todos</span>
-              <span v-else>Publicar Todos</span>
+              <span v-if="todosPublicados">Dar de baja todos</span>
+              <span v-else>Publicar todos</span>
             </button>
 
             <button 
@@ -154,7 +154,7 @@
                     :class="item.publicado ? 'btn-warning' : 'btn-success'"
                     :id="`btn-publicar-${item.id}`"
                   >
-                    <span v-if="item.publicado">Despublicar</span>
+                    <span v-if="item.publicado">Dar de baja</span>
                     <span v-else>Publicar</span>
                   </button>
                 </div>
