@@ -1,0 +1,1609 @@
+/* =======================
+  ESTILOS GENERALES
+======================= */
+*, ::after, ::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #DFF2FE;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #213547;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.main-content {
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+}
+/* =======================
+  TIPOGRAFÍA
+======================= */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #213547;
+  margin-bottom: 30px;
+  text-align: center;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: #213547;
+  margin-bottom: 10px;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #213547;
+}
+p, .body-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #213547;
+}
+.text-secondary, .caption {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #213547;
+}
+/* =======================
+  NAVBAR
+======================= */
+.nav {
+  background: #88B7F3;
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+}
+.nav-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  --icon-toggle-menu: url(../imagenes/menu.svg);
+  --transform-menu-show: translate(-100%);
+}
+.nav-container:has(.nav-input:checked) {
+  --icon-toggle-menu: url(../imagenes/cerrar.svg);
+  --transform-menu-show: translate(0);
+}
+.nav-figure {
+  z-index: 1002;
+  position: relative;
+} 
+.nav-logo {
+  margin-left: 10px;
+  margin-top: 8px;
+  width: 100px;
+}
+.nav-toggle {
+  z-index: 1002;
+  position: relative;
+  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  background-image: var(--icon-toggle-menu);
+  background-size: cover;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-input {
+  display: none;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  cursor: pointer;
+}
+.nav-list {
+  transform: var(--transform-menu-show);
+  position: fixed;
+  inset: 0;
+  display: grid;
+  gap: 2rem;
+  padding: 1.5rem 5%;
+  background-color: #88B7F3;
+  list-style: none;
+  place-content: center;
+  transition: .4s transform;
+  z-index: 1001;
+}
+.nav-item {
+  text-align: center;
+}
+.nav-link {
+  text-decoration: none;
+  color: #f6f6f6;
+  font-size: 30px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+@media (min-width: 961px) {
+  .nav {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+  }
+  .nav-container {
+    --transform-menu-show: translate(0);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    margin-left: 10px;
+    margin-top: 8px;
+    width: 100px;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  .nav-list {
+    position: static;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    margin-right: 10px;
+    background-color: transparent;
+    transition: unset;
+    z-index: auto;
+  }
+  .nav-link {
+    font-size: 25px;
+    margin-right: 10px;
+  }
+}
+/* =======================
+  LOGIN
+======================= */
+.login-wrapper, 
+.register-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container, 
+.register-container  {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+/*.login-bg {
+  background-image: url('../imagenes/fondo2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}*/
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img-lo-reg {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: -20px auto 20px;
+}
+.regresar {
+  margin-top: 40px;
+  color: #213547;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: -5px;
+}
+.regresar-l {
+  margin-top: 40px;
+  color: #213547;
+  font-size: 16px;
+  line-height: 24px;
+}
+.nav-to {
+  margin-top: 20px;
+  text-decoration: none;
+  color: #213547;
+  transition: color 0.3s ease;
+  font-size: 16px;
+  line-height: 24px;
+}
+.nav-to:hover {
+  color: #3ABEF9;
+}
+.password-info {
+  color: #213547;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  margin-top: -15px;
+  margin-bottom: -9px;
+  background-color: #DFF2FE;
+  border: 1px solid #88B7F3;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.profesor-fields,
+.estudiante-fields {
+  width: 100%;
+}
+.profesor-fields input,
+.estudiante-fields input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+/* =======================
+  FORMULARIOS
+======================= */
+input {
+  width: 100%;
+  height: 45px; 
+  padding: 12px; 
+  border: 2px solid rgba(33, 53, 71, 0.3); 
+  border-radius: 8px;
+  background: #F6F6F6;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  color: #213547;
+  font-weight: 400;
+}
+.form-lg {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+}
+input:focus {
+  border-color: #3ABEF9;
+  outline: none;
+}
+input.error {
+  border-color: #E54848;
+  outline: none;
+}
+select {
+  width: 100%; 
+  height: 45px;
+  padding: 12px; 
+  border: 2px solid rgb(33, 53, 71, 0.3); 
+  border-radius: 8px;
+  background: #F6F6F6;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+select:focus {
+  border-color: #3ABEF9;
+  outline: none;
+}
+.form-container label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #213547;
+  margin: 4px;
+}
+.color-pointer{
+  width: 100%; 
+  height: 45px; 
+  cursor: pointer;
+  border: 2px solid rgb(33, 53, 71, 0.3);
+}
+.color-box {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #213547;
+  border-radius: 15px;
+  margin: 0 auto; 
+}
+@media (max-width: 960px) {
+  .color-box {
+    margin: 0 0 0 auto;
+  }
+}
+.form-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(33, 53, 71, 0.55); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; 
+}
+.form-container {
+  background: #FFFFFF;
+  padding: 25px;
+  border-radius: 8px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+.form-container h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: #213547;
+}
+/* =======================
+  BOTONES
+======================= */
+.btn-div {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  place-content: center;
+}
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+/* Botón Primario */
+button, .btn-primary {
+  background: #3ABEF9;
+  color: #F6F6F6;
+  border: 0.2px solid #213448;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+button:hover, .btn-primary:hover {
+  background: #29A9E0;
+}
+button:disabled, .btn-primary:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+}
+/* Botón Secundario */
+.btn-secondary {
+  background: transparent;
+  color: #213448;
+  border: 0.2px solid #213448;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+.btn-secondary:hover {
+  background: #EEF7FF;
+}
+.btn-secondary:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+}
+/* Botón Peligro */
+.btn-danger {
+  background: #E54848;
+  color: #F6F6F6;
+  border: 0.2px solid #213448;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+.btn-danger:hover {
+  background: #C93F3F;
+}
+.btn-accion {
+  width: 100px;
+  padding: 8px 16px;
+  margin-left: 8px;
+  font-size: 14px;
+  min-height: 40px;
+}
+/* =======================
+  DASHBOARD
+======================= */
+.hero-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInDown 0.8s ease;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  text-decoration: none;
+  color: #2d3748;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.6s ease backwards;
+  border: 2px solid transparent;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1a202c;
+}
+.card-description {
+  font-size: 0.95rem;
+  color: #718096;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.card-arrow {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #667eea;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+.card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Animaciones de entrada escalonadas */
+.card-1 { animation-delay: 0.1s; }
+.card-2 { animation-delay: 0.15s; }
+.card-3 { animation-delay: 0.2s; }
+.card-4 { animation-delay: 0.25s; }
+.card-5 { animation-delay: 0.3s; }
+.card-6 { animation-delay: 0.35s; }
+.card-7 { animation-delay: 0.4s; }
+.card-8 { animation-delay: 0.45s; }
+.card-9 { animation-delay: 0.5s; }
+.card-10 { animation-delay: 0.55s; }
+.card-11 { animation-delay: 0.6s; }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  } 
+  .card {
+    padding: 2rem 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .main-content {
+    padding: 2rem 1rem;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+}
+/* =======================
+  TABLAS
+======================= */
+/* Anchos compactos */
+.col-nombre      { width: 16%; }
+.col-abrev       { width: 6%; }
+.col-tipo        { width: 12%; }
+.col-division    { width: 12%; }
+.col-color       { width: 6%; }
+.col-horas       { width: 6%; }
+.col-min         { width: 6%; }
+.col-max         { width: 6%; }
+.col-acciones    { width: 30%; }
+
+.col-nombre-p      { width: 16%; }
+.col-asig       { width: 12%; }
+.col-div        { width: 12%; }
+.col-aul    { width: 8%; }
+.col-edi       { width: 8%; }
+.col-per       { width: 16%; }
+.col-gru         { width: 6%; }
+.col-acc    { width: 19%; }
+.table-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.table-container .styled-table {
+  width: 90%;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.table-container .styled-table thead tr {
+  background-color: #88B7F3;
+  color: #ffffff;
+  text-align: left;
+  font-weight: 600;
+}
+.table-container .styled-table th,
+.table-container .styled-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #A6E7F0;
+  font-size: 16px;
+  line-height: 24px;
+}
+.table-container .styled-table tbody tr:nth-child(even) {
+  background-color: #F6F6F6;
+}
+.table-container .styled-table tbody tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+/*Tabla responsive*/
+@media (max-width: 960px) {
+  .table-container {
+    padding: 0 5px;
+  }
+  .table-container .styled-table {
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .table-container .styled-table thead {
+    display: none;
+  }
+  .table-container .styled-table,
+  .table-container .styled-table tbody,
+  .table-container .styled-table tr,
+  .table-container .styled-table td {
+    display: block;
+    width: 100%;
+  }
+  .table-container .styled-table tr {
+    margin-bottom: 15px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 10px
+  }
+  .table-container .styled-table td {
+    text-align: right;
+    padding: 10px 10px;
+    position: relative;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .table-container .styled-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 50%;
+    text-align: left;
+    font-weight: 600;
+    color: #213547;
+  }
+  .pagination button {
+    padding: 8px 10px;
+    font-size: 14px;
+    min-width: 30px;
+    margin-bottom: 25px;
+  }
+  .table-container .styled-table td:last-child {
+    display: flex;
+    flex-direction: column;   
+    gap: 8px;
+    justify-content: flex-start; 
+    align-items: flex-end;    
+    flex-wrap: wrap;
+  }
+  .table-container .styled-table td .btn-accion {
+    font-size: 13px;
+    padding: 6px 12px;
+    min-height: 34px;
+    border-radius: 6px;
+    width: 100px;
+    text-align: center;
+  }
+}
+/* =======================
+  PAGINACIÓN
+======================= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 5px;
+}
+.pagination button {
+  background-color: #F6F6F6;
+  color: #213547;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #A6E7F0;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  min-width: 35px;
+  min-height: 44px;
+}
+.pagination button:hover {
+  background-color: #A6E7F0;
+}
+.pagination button.active {
+  background-color: #3ABEF9;
+  color: #F6F6F6;
+  font-weight: 600;
+}
+/* =======================
+   TABLA DE HORARIO
+======================= */
+.horario-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+.horario-grid th,
+.horario-grid td {
+  border: 1px solid #88B7F3;
+  padding: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  line-height: 24px;
+}
+.horario-grid th {
+  background-color: #88B7F3;
+  color: #213547;
+  font-weight: 600;
+}
+.horario-grid td.celda {
+  cursor: pointer;
+  background-color: #FFFFFF;
+  border: 1px solid #88B7F3;
+}
+.horario-grid td.celda:hover {
+  border: 2px solid #213547;
+}
+/* 2 ESTADOS para las celdas */
+.disponible {
+  background-color: #b8e1f4 !important; 
+}
+.no_disponible {
+  background-color: #edaeae !important; 
+  color: #F6F6F6;
+}
+.turno-selector {
+  margin: 1rem 0;
+}
+.turno-selector label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: #213547;
+  font-size: 16px;
+  line-height: 24px;
+}
+/* ===========================
+   SELECTOR DE COLOR (CÍRCULOS)
+=========================== */
+.color-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 1.5rem 0 2rem;
+}
+.color-circulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #213547;
+}
+.color-circulo .circulo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-bottom: 0.4rem;
+  transition: all 0.2s ease-in-out;
+}
+.color-circulo.activo .circulo {
+  transform: scale(1.2);
+  border-width: 3px !important;
+}
+.color-circulo span {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+/* =======================
+  ESTADO VACÍO
+======================= */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  width: 90%;
+}
+.empty-content {
+  padding: 30px 40px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+}
+.empty-content h3 {
+  color: #213547;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  margin-bottom: 8px;
+}
+.empty-content p {
+  color: #213547;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .empty-content {
+    padding: 25px 20px;
+  }
+}
+/* =======================
+  SWAL
+======================= */
+.swal2-container {
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+.swal2-backdrop {
+  position: fixed !important;
+  z-index: 999998 !important;
+}
+/* =======================
+  LOADING PAGE
+======================= */
+/* Loading state */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 20px;
+}
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #A6E7F0;
+  border-top-color: #3ABEF9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-container p {
+  color: #213547;
+  font-size: 16px;
+  font-weight: 500;
+}
+/* =======================
+  LOADING PAGE Acciones
+======================= */
+.action-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%); /* centra el cuadro */
+  z-index: 9999;
+  border-radius: 10px; /* opcional */
+}
+.action-loading .spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ddd;
+  border-top-color: #3ABEF9;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+/* =======================
+  PEFIL
+======================= */
+.perfil-main {
+  min-height: calc(100vh - 100px);
+  background-color: #DFF2FE;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.perfil-main h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #213547;
+  text-align: center;
+}
+.perfil-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.avatar-container {
+  margin-bottom: 20px;
+}
+.perfil-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3ABEF9 0%, #88B7F3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(58, 190, 249, 0.3);
+  border: 4px solid #FFFFFF;
+}
+.avatar-text {
+  font-size: 48px;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+}
+.info-table {
+  width: 100%;
+}
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(136, 183, 243, 0.2);
+}
+.info-row:last-child {
+  border-bottom: none;
+}
+.info-label {
+  font-weight: 600;
+  color: #88B7F3;
+}
+.info-value {
+  font-weight: 500;
+  color: #213547;
+}
+.btn-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+}
+/* =======================
+  CONTENEDOR PRINCIPAL DE HORARIOS
+======================= */
+.horarios-multi-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* =======================
+  HEADER Y CONTROLES
+======================= */
+.page-header-container {
+  margin-bottom: 30px;
+}
+.header-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* =======================
+  SELECTOR DE VISTA (PESTAÑAS)
+======================= */
+.vista-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 2rem auto;
+  max-width: 400px;
+}
+.vista-tab {
+  flex: 1;
+  padding: 10px 20px;
+  background: #FFFFFF;
+  color: #213547;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  min-height: 40px;
+}
+.vista-tab:hover {
+  background: #EEF7FF;
+}
+.vista-tab.active {
+  background: #3ABEF9;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+/* =======================
+  BÚSQUEDA
+======================= */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 0.5rem;
+}
+.search-label {
+  font-weight: 600;
+  color: #213547;
+  font-size: 16px;
+  line-height: 24px;
+}
+.search-input {
+  width: 100%;
+  max-width: 500px;
+}
+/* =======================
+  TARJETAS DE HORARIO
+======================= */
+.horarios-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+.horario-card {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+/* =======================
+  HEADER DE TARJETA
+======================= */
+.horario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+.horario-info {
+  flex: 1;
+}
+.school-info {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+.horario-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: #213547;
+  margin: 8px 0;
+}
+.tutor-info,
+.division-info {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 4px 0;
+}
+/* =======================
+  TABLA DE HORARIO
+======================= */
+.horario-tabla-container {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+.horario-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.horario-grid th,
+.horario-grid td {
+  border: 1px solid #E0E0E0;
+  padding: 10px;
+  text-align: center;
+}
+.horario-grid th {
+  background-color: #213547;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+}
+.hora-column {
+  width: 120px;
+  min-width: 100px;
+}
+.dia-column {
+  width: auto;
+}
+.hora-cell {
+  background-color: #F6F6F6;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+.clase-cell {
+  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+  vertical-align: top;
+  min-height: 80px;
+  padding: 8px;
+}
+.clase-cell:hover {
+  border: 2px solid #3ABEF9;
+}
+/* =======================
+  CONTENIDO DE CLASES
+======================= */
+.clase-content {
+  padding: 6px;
+  text-align: center;
+}
+.clase-multiple {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+.clase-materia {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+.clase-profesor,
+.clase-grupo,
+.clase-aula {
+  font-size: 12px;
+  line-height: 18px;
+  opacity: 0.9;
+  margin-bottom: 2px;
+}
+.clase-empty {
+  min-height: 60px;
+}
+/* =======================
+  ESTADO VACÍO Y ERROR
+======================= */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 40px 20px;
+}
+.empty-content {
+  text-align: center;
+  max-width: 500px;
+}
+.empty-content h3 {
+  font-size: 24px;
+  color: #213547;
+  margin-bottom: 15px;
+}
+.empty-content p {
+  font-size: 16px;
+  color: #666;
+  line-height: 24px;
+}
+.error-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  gap: 20px;
+  text-align: center;
+  padding: 40px 20px;
+}
+.error-state p {
+  color: #E54848;
+  font-weight: 500;
+}
+.no-results-text {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 16px;
+  color: #666;
+}
+/* =======================
+  RESPONSIVE DESIGN
+======================= */
+@media (max-width: 768px) {
+  .horarios-multi-container {
+    padding: 10px;
+  }
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .header-actions button {
+    width: 100%;
+  }
+  .vista-selector {
+    max-width: 100%;
+  }
+  .vista-tab {
+    font-size: 14px;
+    padding: 9px 16px;
+    min-height: 38px;
+  }
+  .search-input {
+    max-width: 100%;
+  }
+  .horario-card {
+    padding: 15px;
+  }
+  .horario-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btn-accion {
+    width: 100%;
+  }
+  .horario-grid th,
+  .horario-grid td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .hora-column {
+    width: 80px;
+    min-width: 70px;
+  }
+  .horario-grid th {
+    font-size: 14px;
+  }
+  .hora-cell {
+    font-size: 12px;
+  }
+  .clase-materia {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .clase-profesor,
+  .clase-grupo,
+  .clase-aula {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .horario-grid th,
+  .horario-grid td {
+    padding: 6px;
+    font-size: 11px;
+  }
+  .hora-column {
+    width: 70px;
+    min-width: 60px;
+  }
+  .horario-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .clase-materia {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .clase-profesor,
+  .clase-grupo,
+  .clase-aula {
+    font-size: 10px;
+    line-height: 15px;
+  }
+  .vista-tab {
+    font-size: 13px;
+    padding: 8px 14px;
+    min-height: 36px;
+  }
+}
+/* LEYENDA DE COLORES INDIVIDUAL */
+.leyenda-colores-individual {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border: 1px solid #dee2e6;
+}
+.leyenda-titulo-individual {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.leyenda-items-individual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.leyenda-item-individual {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.leyenda-color-individual {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+.leyenda-nombre-individual {
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+  white-space: nowrap;
+}
+/* Responsive para la leyenda individual */
+@media (max-width: 768px) {
+  .leyenda-colores-individual {
+    padding: 10px 12px;
+  }
+  .leyenda-titulo-individual {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .leyenda-items-individual {
+    gap: 6px;
+  }
+  .leyenda-item-individual {
+    padding: 4px 8px;
+  }
+  .leyenda-color-individual {
+    width: 16px;
+    height: 16px;
+  }
+  .leyenda-nombre-individual {
+    font-size: 11px;
+  }
+}
+
+/* =======================
+  RESPONSIVE DESIGN
+======================= */
+@media (max-width: 768px) {
+  .horarios-multi-container {
+    padding: 10px;
+  }
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .header-actions button {
+    width: 100%;
+  }
+  .vista-selector {
+    max-width: 100%;
+    gap: 5px;
+  }
+  .vista-tab {
+    font-size: 13px;
+    padding: 8px 12px;
+    min-height: 36px;
+  }
+  .search-input {
+    max-width: 100%;
+  }
+  .horario-card {
+    padding: 12px;
+    border-radius: 6px;
+  }
+  .horario-header {
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  .horario-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .school-info,
+  .tutor-info,
+  .division-info {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .btn-accion {
+    width: 100%;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  
+  /* Tabla de horario responsive */
+  .horario-tabla-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -12px;
+    padding: 0 12px;
+  }
+  
+  .horario-grid {
+    min-width: 600px; /* Asegura scroll horizontal si es necesario */
+  }
+  
+  .horario-grid th,
+  .horario-grid td {
+    padding: 6px 4px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  
+  .hora-column {
+    width: 65px;
+    min-width: 65px;
+  }
+  
+  .horario-grid th {
+    font-size: 12px;
+    line-height: 18px;
+    padding: 8px 4px;
+  }
+  
+  .hora-cell {
+    font-size: 10px;
+    line-height: 14px;
+    padding: 4px 2px;
+  }
+  
+  .clase-cell {
+    min-height: 60px;
+    padding: 4px;
+  }
+  
+  .clase-content {
+    padding: 3px;
+  }
+  
+  .clase-materia {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  
+  .clase-profesor,
+  .clase-grupo,
+  .clase-aula {
+    font-size: 9px;
+    line-height: 14px;
+    margin-bottom: 1px;
+  }
+  
+  .clase-multiple {
+    margin-top: 4px;
+    padding-top: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .horarios-multi-container {
+    padding: 5px;
+  }
+  
+  .horario-card {
+    padding: 10px;
+  }
+  
+  .horario-title {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  
+  .school-info,
+  .tutor-info,
+  .division-info {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  
+  .vista-tab {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-height: 34px;
+  }
+  
+  /* Tabla más compacta en móviles */
+  .horario-tabla-container {
+    margin: 0 -10px;
+    padding: 0 10px;
+  }
+  
+  .horario-grid {
+    min-width: 500px;
+  }
+  
+  .horario-grid th,
+  .horario-grid td {
+    padding: 4px 2px;
+    font-size: 10px;
+    line-height: 14px;
+  }
+  
+  .hora-column {
+    width: 55px;
+    min-width: 55px;
+  }
+  
+  .horario-grid th {
+    font-size: 11px;
+    line-height: 16px;
+    padding: 6px 2px;
+  }
+  
+  .hora-cell {
+    font-size: 9px;
+    line-height: 12px;
+    padding: 3px 1px;
+  }
+  
+  .clase-cell {
+    min-height: 50px;
+    padding: 3px;
+  }
+  
+  .clase-content {
+    padding: 2px;
+  }
+  
+  .clase-materia {
+    font-size: 10px;
+    line-height: 14px;
+    margin-bottom: 1px;
+  }
+  
+  .clase-profesor,
+  .clase-grupo,
+  .clase-aula {
+    font-size: 8px;
+    line-height: 12px;
+    margin-bottom: 1px;
+  }
+  
+  .clase-multiple {
+    margin-top: 3px;
+    padding-top: 3px;
+  }
+  
+  /* Leyenda más compacta */
+  .leyenda-colores-individual {
+    padding: 8px 10px;
+    margin: 12px 0;
+  }
+  
+  .leyenda-titulo-individual {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  
+  .leyenda-items-individual {
+    gap: 4px;
+  }
+  
+  .leyenda-item-individual {
+    padding: 3px 6px;
+  }
+  
+  .leyenda-color-individual {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .leyenda-nombre-individual {
+    font-size: 10px;
+  }
+}

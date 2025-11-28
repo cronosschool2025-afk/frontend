@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1e3a8a" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronos</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- 🚀 REGISTRO DEL SERVICE WORKER (obligatorio para instalación) -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js")
+            .then(() => console.log("Service Worker registrado"))
+            .catch((err) => console.error("Error SW:", err));
+        });
+      }
+    </script>
+  </body>
+</html>
