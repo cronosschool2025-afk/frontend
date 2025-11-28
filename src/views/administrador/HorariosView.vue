@@ -150,7 +150,7 @@
                   <button 
                     v-if="vistaActual === 'grupos'"
                     @click="togglePublicarGrupo(item.id, item.publicado)" 
-                    class="btn-accion"
+                    class="btn-accion btn-primary"
                     :class="item.publicado ? 'btn-warning' : 'btn-success'"
                     :id="`btn-publicar-${item.id}`"
                   >
