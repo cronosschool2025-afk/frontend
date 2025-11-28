@@ -154,7 +154,7 @@ const horarioProfesor = ref(null);
 
 // --- URL de la API ---
 const HOST = window.location.hostname;
-const NESTJS_API = `http://${HOST}:3000`;
+const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
 
 
 // --- FUNCIÓN PARA OBTENER EL ID DEL PROFESOR DESDE EL LOCAL STORAGE ---

@@ -152,15 +152,14 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname
 
-const API_ASIGNACIONES = `http://${HOST}:3000/profesor-asignatura`
-const API_ASIGNACIONES_AULAS = `http://${HOST}:3000/profesor-aula`
-const API_PROFESORES = `http://${HOST}:3000/profesores`
-const API_ASIGNATURAS = `http://${HOST}:3000/asignaturas`
-const API_PERIODOS = `http://${HOST}:3000/periodos`
-const API_GRUPOS = `http://${HOST}:3000/grupos`
-const API_AULAS = `http://${HOST}:3000/aulas`
+const API_ASIGNACIONES = `https://backend-production-04cf.up.railway.app/profesor-asignatura`
+const API_ASIGNACIONES_AULAS = `https://backend-production-04cf.up.railway.app/profesor-aula`
+const API_PROFESORES = `https://backend-production-04cf.up.railway.app/profesores`
+const API_ASIGNATURAS = `https://backend-production-04cf.up.railway.app/asignaturas`
+const API_PERIODOS = `https://backend-production-04cf.up.railway.app/periodos`
+const API_GRUPOS = `https://backend-production-04cf.up.railway.app/grupos`
+const API_AULAS = `https://backend-production-04cf.up.railway.app/aulas`
 
 
 // Estados

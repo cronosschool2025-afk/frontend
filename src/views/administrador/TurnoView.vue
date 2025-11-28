@@ -148,7 +148,7 @@ import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
 const HOST = window.location.hostname
-const API_TURNOS = `http://${HOST}:3000/turnos`
+const API_TURNOS = `https://backend-production-04cf.up.railway.app/turnos`
 
 // Días de la semana
 const diasSemana = {

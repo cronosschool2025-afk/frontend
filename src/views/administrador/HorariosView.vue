@@ -271,7 +271,7 @@ const HOST = window.location.hostname;
 
 // --- URLs de las APIs ---
 const PYTHON_API = `http://${HOST}:8000`;
-const NESTJS_API = `http://${HOST}:3000`;
+const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
 
 
 // --- COMPUTED: Verificar si todos están publicados ---

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://10.62.82.40:3000'
+axios.defaults.baseURL = 'https://backend-production-04cf.up.railway.app'
 
 axios.interceptors.request.use(
   (config) => {

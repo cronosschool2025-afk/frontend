@@ -178,10 +178,8 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import '../../assets/styles.css'
 
-const HOST = window.location.hostname
-
-const API_URL = `http://${HOST}:3000/asignaturas`
-const API_DIVISIONES = `http://${HOST}:3000/divisiones`
+const API_URL = `https://backend-production-04cf.up.railway.app/asignaturas`
+const API_DIVISIONES = `https://backend-production-04cf.up.railway.app/divisiones`
 
 // luego usas API_URL y API_DIVISIONES normalmente dentro del componente
 

@@ -179,12 +179,10 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname;
-
-const API_GRUPOS = `http://${HOST}:3000/grupos`;
-const API_DIVISIONES = `http://${HOST}:3000/divisiones`;
-const API_TURNOS = `http://${HOST}:3000/turnos`;
-const API_PROFESORES = `http://${HOST}:3000/profesores`;
+const API_GRUPOS = `https://backend-production-04cf.up.railway.app/grupos`;
+const API_DIVISIONES = `https://backend-production-04cf.up.railway.app/divisiones`;
+const API_TURNOS = `https://backend-production-04cf.up.railway.app/turnos`;
+const API_PROFESORES = `https://backend-production-04cf.up.railway.app/profesores`;
 
 
 const grupos = ref([])

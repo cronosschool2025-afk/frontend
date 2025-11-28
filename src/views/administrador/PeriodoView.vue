@@ -140,7 +140,7 @@ import Swal from 'sweetalert2'
 
 const HOST = window.location.hostname
 
-const API_PERIODOS = `http://${HOST}:3000/periodos`
+const API_PERIODOS = `https://backend-production-04cf.up.railway.app/periodos`
 
 
 const periodos = ref([])

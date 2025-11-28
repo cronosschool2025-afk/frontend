@@ -168,8 +168,7 @@ const horarioPublicado = ref(false);
 const grupoAlumno = ref(null); // ID del grupo del alumno
 
 // --- URLs de las APIs ---
-const HOST = window.location.hostname;
-const NESTJS_API = `http://${HOST}:3000`;
+const NESTJS_API = `https://backend-production-04cf.up.railway.app`;
 
 
 // --- FUNCIÓN PARA OBTENER EL ID DEL ALUMNO DESDE EL LOCAL STORAGE ---

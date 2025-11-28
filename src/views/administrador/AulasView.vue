@@ -157,8 +157,7 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname
-const BASE_URL = `http://${HOST}:3000`
+const BASE_URL = `https://backend-production-04cf.up.railway.app`
 
 const API_AULAS = `${BASE_URL}/aulas`
 const API_EDIFICIOS = `${BASE_URL}/edificios`

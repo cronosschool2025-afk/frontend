@@ -156,10 +156,8 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname;
-
-const API_EDIFICIOS = `http://${HOST}:3000/edificios`;
-const API_DIVISIONES = `http://${HOST}:3000/divisiones`;
+const API_EDIFICIOS = `https://backend-production-04cf.up.railway.app/edificios`;
+const API_DIVISIONES = `https://backend-production-04cf.up.railway.app/divisiones`;
 
 
 const edificios = ref([])

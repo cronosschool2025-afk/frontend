@@ -166,7 +166,7 @@ import Swal from 'sweetalert2'
 const router = useRouter()
 
 const HOST = window.location.hostname
-const API_URL = `http://${HOST}:3000/profesores`
+const API_URL = `https://backend-production-04cf.up.railway.app/profesores`
 
 const profesores = ref([])
 const itemsPerPage = 5

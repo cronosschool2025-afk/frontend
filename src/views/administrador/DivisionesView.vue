@@ -120,8 +120,7 @@ import axios from 'axios'
 import '../../assets/styles.css'
 import Swal from 'sweetalert2'
 
-const HOST = window.location.hostname;
-const API_URL = `http://${HOST}:3000/divisiones`;
+const API_URL = `https://backend-production-04cf.up.railway.app/divisiones`;
 
 
 const divisiones = ref([])

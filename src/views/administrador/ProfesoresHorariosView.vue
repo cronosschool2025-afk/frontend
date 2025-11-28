@@ -113,9 +113,9 @@ import Swal from 'sweetalert2'
 // APIs
 const HOST = window.location.hostname
 
-const API_HORARIOS = `http://${HOST}:3000/horario-profesor`
-const API_PROFESORES = `http://${HOST}:3000/profesores`
-const API_TURNOS = `http://${HOST}:3000/turnos`
+const API_HORARIOS = `https://backend-production-04cf.up.railway.app/horario-profesor`
+const API_PROFESORES = `https://backend-production-04cf.up.railway.app/profesores`
+const API_TURNOS = `https://backend-production-04cf.up.railway.app/turnos`
 
 // Router
 const router = useRouter()

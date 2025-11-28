@@ -117,7 +117,7 @@ const id_grupo = ref(null)
 // Cargar grupos
 const obtenerGrupos = async () => {
   try {
-    const res = await axios.get("http://192.168.1.136:3000:3000/grupos")
+    const res = await axios.get("https://backend-production-04cf.up.railway.app/grupos")
     grupos.value = res.data
   } catch (error) {
     console.error("Error cargando grupos:", error)
