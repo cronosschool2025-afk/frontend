@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-page">
+  <div v-if="showLanding" class="landing-page">
     <nav class="nav">
       <div class="nav-container">
         <router-link to="/" class="nav-figure">
@@ -175,10 +175,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const showLanding = ref(false)
 
 const features = ref([
   {
@@ -241,9 +242,11 @@ const checkExistingSession = () => {
   const rol = localStorage.getItem('rol')
   
   if (token && rol) {
-    // Hay una sesión activa, redirigir según el rol
+    // Hay una sesión activa, redirigir según el rol SIN mostrar la landing
     redirectByRole(rol)
+    return true
   }
+  return false
 }
 
 // Función para redirigir según el rol
@@ -304,12 +307,20 @@ const scrollToFeatures = () => {
   }
 }
 
+onBeforeMount(() => {
+  // Verificar sesión ANTES de montar el componente
+  const hasSession = checkExistingSession()
+  if (!hasSession) {
+    // Solo mostrar la landing si NO hay sesión activa
+    showLanding.value = true
+  }
+})
+
 onMounted(() => {
-  // PRIMERO verificar si hay sesión activa
-  checkExistingSession()
-  
-  // Luego iniciar el autoplay del carousel
-  startAutoPlay()
+  // Solo iniciar el autoplay si la landing se está mostrando
+  if (showLanding.value) {
+    startAutoPlay()
+  }
 })
 
 onUnmounted(() => {
