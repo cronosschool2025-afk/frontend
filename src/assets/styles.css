@@ -1086,7 +1086,7 @@ button:disabled, .btn-primary:disabled {
   margin: 8px 0;
 }
 .horario-actions{
-  width: 200px;
+  height: 200px;
 }
 .tutor-info,
 .division-info {
