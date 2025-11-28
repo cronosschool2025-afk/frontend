@@ -3,7 +3,7 @@
     <div class="register-container">
       <img src="../../imagenes/logo1.png" class="img-lo-reg" alt="Logo Cronos" />
       
-      <form @submit="handleSubmit" class="form-lg">
+      <form @submit.prevent="register" class="form-lg">
         <input 
           v-model="nombre" 
           type="text" 
@@ -70,7 +70,7 @@
         <!-- Campo SELECT para ALUMNO -->
         <transition name="fade">
           <div v-show="!esProfesor && correo_electronico" class="estudiante-fields">
-            <select v-model="id_grupo" required>
+            <select v-model="id_grupo" :required="!esProfesor">
               <option value="" disabled selected>Selecciona un grupo</option>
               <option v-for="g in grupos" :key="g.id" :value="g.id">
                 {{ g.grado }}° {{ g.abreviatura }} ({{ g.division?.nombre }})
@@ -80,7 +80,9 @@
         </transition>
 
         <div class="btn-container">
-          <button type="submit" class="btn-primary">Registrarse</button>
+          <button type="submit" class="btn-primary" :disabled="procesando">
+            {{ procesando ? 'Registrando...' : 'Registrarse' }}
+          </button>
         </div>
 
         <p class="regresar">
@@ -110,17 +112,25 @@ const telefono = ref('')
 const titulo = ref('')
 const esProfesor = ref(false)
 const mostrarInfo = ref(false)
+const procesando = ref(false)
 
 const grupos = ref([])      
-const id_grupo = ref(null)  
+const id_grupo = ref('')  
 
 // Cargar grupos
 const obtenerGrupos = async () => {
   try {
-    const res = await axios.get("https://backend-production-04cf.up.railway.app/grupos")
+    const res = await axios.get("/grupos")
     grupos.value = res.data
+    console.log('Grupos cargados:', grupos.value)
   } catch (error) {
     console.error("Error cargando grupos:", error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudieron cargar los grupos',
+      confirmButtonColor: '#3ABEF9'
+    })
   }
 }
 
@@ -150,13 +160,11 @@ const esContrasenaSegura = computed(() =>
   longitudValida.value
 )
 
-const register = async (event) => {
-  // Prevenir recarga de página
-  if (event) {
-    event.preventDefault()
-    event.stopPropagation()
-  }
-
+const register = async () => {
+  if (procesando.value) return
+  
+  console.log('Iniciando registro...')
+  
   if (!esContrasenaSegura.value) {
     Swal.fire({
       icon: 'info',
@@ -172,23 +180,39 @@ const register = async (event) => {
     return
   }
 
+  procesando.value = true
+
   try {
     const payload = {
-      nombre: nombre.value,
-      apellido_paterno: apellido_paterno.value,
-      apellido_materno: apellido_materno.value,
-      correo_electronico: correo_electronico.value,
+      nombre: nombre.value.trim(),
+      apellido_paterno: apellido_paterno.value.trim(),
+      apellido_materno: apellido_materno.value.trim(),
+      correo_electronico: correo_electronico.value.trim(),
       contrasena: contrasena.value
     }
 
     if (esProfesor.value) {
-      payload.telefono = telefono.value
-      payload.titulo = titulo.value
+      payload.telefono = telefono.value.trim()
+      payload.titulo = titulo.value.trim()
     } else {
-      payload.id_grupo = id_grupo.value
+      if (!id_grupo.value) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Grupo requerido',
+          text: 'Por favor selecciona un grupo',
+          confirmButtonColor: '#3ABEF9'
+        })
+        procesando.value = false
+        return
+      }
+      payload.id_grupo = parseInt(id_grupo.value)
     }
 
-    await axios.post('/auth/registro', payload)
+    console.log('Payload a enviar:', payload)
+
+    const response = await axios.post('/auth/registro', payload)
+    
+    console.log('Respuesta del servidor:', response.data)
 
     await Swal.fire({
       icon: 'success',
@@ -231,6 +255,7 @@ const register = async (event) => {
 
   } catch (error) {
     console.error('Error completo al registrar:', error)
+    console.error('Error response:', error.response)
     
     let mensaje = 'Error al registrar usuario'
     
@@ -240,7 +265,6 @@ const register = async (event) => {
       mensaje = error.message
     }
 
-    // NO usar await aquí
     Swal.fire({
       icon: 'error',
       title: 'Error al registrar',
@@ -250,10 +274,10 @@ const register = async (event) => {
       background: '#ffffff',
       color: '#213547',
       iconColor: '#E54848',
-      width: '500px',
-      allowOutsideClick: false,
-      allowEscapeKey: false
+      width: '500px'
     })
+  } finally {
+    procesando.value = false
   }
 }
 </script>
