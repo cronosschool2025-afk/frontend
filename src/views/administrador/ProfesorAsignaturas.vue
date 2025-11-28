@@ -74,8 +74,8 @@
 
     <div v-else class="empty-state">
       <div class="empty-content">
-        <h3>No hay asignaciones registradas</h3>
-        <p>Comienza asignando profesores a asignaturas</p>
+        <h3>No hay períodos asignaciones</h3>
+        <p>Comienza agregando tu primera asignación</p>
       </div>
     </div>
 
@@ -201,6 +201,7 @@ const currentAsignaciones = computed(() =>
 
 // ============ FUNCIONES DE CARGA ============
 const cargarCatalogos = async () => {
+  cargando.value = true
   try {
     const [profRes, asigRes, perRes, gruposRes, aulasRes] = await Promise.all([
       axios.get(API_PROFESORES),
@@ -226,6 +227,8 @@ const cargarCatalogos = async () => {
       iconColor: '#E54848',
       width: '450px',
     })
+  }finally {
+    cargando.value = false
   }
 }
 
