@@ -176,6 +176,9 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const features = ref([
   {
@@ -232,6 +235,35 @@ const steps = ref([
 const currentStep = ref(0)
 let intervalId = null
 
+// Verificar sesión activa al cargar la página
+const checkExistingSession = () => {
+  const token = localStorage.getItem('access_token')
+  const rol = localStorage.getItem('rol')
+  
+  if (token && rol) {
+    // Hay una sesión activa, redirigir según el rol
+    redirectByRole(rol)
+  }
+}
+
+// Función para redirigir según el rol
+const redirectByRole = (rol) => {
+  switch (rol) {
+    case 'estudiante':
+      router.push({ name: 'alumno-home' })
+      break
+    case 'admin':
+      router.push({ name: 'dashboard' })
+      break
+    case 'profesor':
+      router.push({ name: 'profesor-home' })
+      break
+    default:
+      // Si el rol no es válido, limpiar localStorage
+      localStorage.clear()
+  }
+}
+
 const nextStep = () => {
   if (currentStep.value < steps.value.length - 1) {
     currentStep.value++
@@ -255,7 +287,7 @@ const startAutoPlay = () => {
     } else {
       currentStep.value = 0
     }
-  }, 15000) // Cambia cada 5 segundos
+  }, 15000)
 }
 
 const stopAutoPlay = () => {
@@ -273,6 +305,10 @@ const scrollToFeatures = () => {
 }
 
 onMounted(() => {
+  // PRIMERO verificar si hay sesión activa
+  checkExistingSession()
+  
+  // Luego iniciar el autoplay del carousel
   startAutoPlay()
 })
 
